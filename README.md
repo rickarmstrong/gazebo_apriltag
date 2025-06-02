@@ -6,6 +6,26 @@ Generates AprilTag models compatible with Gazebo Harmonic.
 
 Configure the number and size of tags you'd like to generate by setting `TAG_COUNT` and `TAG_SIZE_PIX`.
 
+## Installation
+
+1. Clone this repo with submodules:
+    
+  ```bash
+  git clone --recurse-submodule https://github.com/rickarmstrong/gazebo_apriltag
+  ```
+
+1. Install the dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+1. Generate the Gazebo Apriltag models:
+
+  ```bash
+    ./generate.py
+  ```
+
 Install models by running:
 ```bash
 cp -R gazebo_apriltag/models/* ~/.gazebo/models/
