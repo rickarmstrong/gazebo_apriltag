@@ -17,30 +17,30 @@ class Generator:
 			self.config_template = f.read()
 
 	def generate(self, tag_directory, tag_name, tag_size, thumb_size):
-		img = cv2.imread('%s/%s.png' % (tag_directory, tag_name), 0)
+		img = cv2.imread('%s/%s.png' % (tag_directory, tag_name), cv2.IMREAD_UNCHANGED)
 		img_full = cv2.resize(img, (tag_size, tag_size), interpolation=cv2.INTER_NEAREST)
 		img_thumb = cv2.resize(img, (thumb_size, thumb_size), interpolation=cv2.INTER_NEAREST)
 
-		if not os.path.exists('models/April%s/materials/textures' % tag_name):
-			os.makedirs('models/April%s/materials/textures' % tag_name)
+		if not os.path.exists('models/%s/materials/textures' % tag_name):
+			os.makedirs('models/%s/materials/textures' % tag_name)
 
-		if not os.path.exists('models/April%s/thumbnails' % tag_name):
-			os.makedirs('models/April%s/thumbnails' % tag_name)
+		if not os.path.exists('models/%s/thumbnails' % tag_name):
+			os.makedirs('models/%s/thumbnails' % tag_name)
 
-		with open('models/April%s/model.sdf' % tag_name, 'w') as f:
+		with open('models/%s/model.sdf' % tag_name, 'w') as f:
 			f.write(self.sdf_template.replace('tag36_11_00000', tag_name))
 
-		with open('models/April%s/model.config' % tag_name, 'w') as f:
+		with open('models/%s/model.config' % tag_name, 'w') as f:
 			f.write(self.config_template.replace('tag36_11_00000', tag_name))
 
-		cv2.imwrite('models/April%s/materials/textures/%s.png' % (tag_name, tag_name), img_full)
-		cv2.imwrite('models/April%s/thumbnails/%s.png' % (tag_name, tag_name), img_thumb)
+		cv2.imwrite('models/%s/materials/textures/%s.png' % (tag_name, tag_name), img_full)
+		cv2.imwrite('models/%s/thumbnails/%s.png' % (tag_name, tag_name), img_thumb)
 
 
 def main():
 	generator = Generator()
 	for i in range(TAG_COUNT):
-		generator.generate('apriltag-imgs/tag36h11', 'tag36_11_%05d' % i, TAG_SIZE_PIX, THUMB_SIZE_PIX)
+		generator.generate('apriltag-imgs/tagCircle21h7', 'tag21_07_%05d' % i, TAG_SIZE_PIX, THUMB_SIZE_PIX)
 
 
 if __name__ == '__main__':
